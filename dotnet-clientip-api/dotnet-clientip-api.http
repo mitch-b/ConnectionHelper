@@ -1,0 +1,6 @@
+@dotnet_clientip_api_HostAddress = https://localhost:32768
+
+GET {{dotnet_clientip_api_HostAddress}}/
+Accept: application/json
+
+###
