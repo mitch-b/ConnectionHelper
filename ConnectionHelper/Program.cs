@@ -1,3 +1,4 @@
+using ConnectionHelper.Extensions;
 using ConnectionHelper.Models;
 using Microsoft.AspNetCore.Mvc;
 using Scalar.AspNetCore;
