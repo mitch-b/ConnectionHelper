@@ -11,8 +11,8 @@ public class ConnectionInformation
     public string? RequestPath { get; set; }
     public string? QueryString { get; set; }
     public string? UserAgent { get; set; }
-    public Dictionary<string, string>? Headers { get; set; }
-    public Dictionary<string, string>? Cookies { get; set; }
+    public object? Headers { get; set; } // Scalar bug with serializing Dictionary<string, string>? type
+    public object? Cookies { get; set; } // Scalar bug with serializing Dictionary<string, string>? type
     public string? Protocol { get; set; }
     public string? Host { get; set; }
     public bool? IsHttps { get; set; }

@@ -29,14 +29,15 @@ app.MapGet("/info", ([FromServices] IHttpContextAccessor httpContextAccessor) =>
         RequestMethod = request?.Method,
         RequestPath = request?.Path,
         QueryString = request?.QueryString.Value,
-        UserAgent = request?.Headers["User-Agent"].FirstOrDefault(),
+        UserAgent = request?.Headers.UserAgent.FirstOrDefault(),
         Headers = request?.Headers.ToDictionary(h => h.Key, h => h.Value.ToString()),
         Cookies = request?.Cookies.ToDictionary(c => c.Key, c => c.Value),
         Protocol = request?.Protocol,
         Host = request?.Host.Host,
         IsHttps = request?.IsHttps
     };
-});
+})
+    .Produces<ConnectionInformation>(StatusCodes.Status200OK);
 
 app.MapGet("/", () => Results.Extensions.Html("<a href='/info'>/info</a>"));
 
