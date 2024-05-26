@@ -11,19 +11,19 @@ EXPOSE 8081
 FROM mcr.microsoft.com/dotnet/sdk:9.0-preview AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
-COPY ["dotnet-clientip-api/dotnet-clientip-api.csproj", "dotnet-clientip-api/"]
-RUN dotnet restore "./dotnet-clientip-api/dotnet-clientip-api.csproj"
+COPY ["ConnectionHelper/ConnectionHelper.csproj", "ConnectionHelper/"]
+RUN dotnet restore "./ConnectionHelper/ConnectionHelper.csproj"
 COPY . .
-WORKDIR "/src/dotnet-clientip-api"
-RUN dotnet build "./dotnet-clientip-api.csproj" -c $BUILD_CONFIGURATION -o /app/build
+WORKDIR "/src/ConnectionHelper"
+RUN dotnet build "./ConnectionHelper.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
 ARG BUILD_CONFIGURATION=Release
-RUN dotnet publish "./dotnet-clientip-api.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
+RUN dotnet publish "./ConnectionHelper.csproj" -c $BUILD_CONFIGURATION -o /app/publish /p:UseAppHost=false
 
 # This stage is used in production or when running from VS in regular mode (Default when not using the Debug configuration)
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "dotnet-clientip-api.dll"]
+ENTRYPOINT ["dotnet", "ConnectionHelper.dll"]

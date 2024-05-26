@@ -1,6 +1,8 @@
 ﻿using System.Net.Mime;
 using System.Text;
 
+namespace ConnectionHelper.Extensions;
+
 static class ResultsExtensions
 {
     public static IResult Html(this IResultExtensions resultExtensions, string html)

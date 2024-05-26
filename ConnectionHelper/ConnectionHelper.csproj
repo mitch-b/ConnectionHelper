@@ -4,7 +4,7 @@
     <TargetFramework>net9.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <RootNamespace>dotnet_clientip_api</RootNamespace>
+    <RootNamespace>ConnectionHelper</RootNamespace>
     <UserSecretsId>398035c9-3fdb-4963-aeb8-15bc844d1810</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>

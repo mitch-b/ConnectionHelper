@@ -1,3 +1,4 @@
+using ConnectionHelper.Models;
 using Microsoft.AspNetCore.Mvc;
 using Scalar.AspNetCore;
 
@@ -17,7 +18,7 @@ app.MapGet("/info", ([FromServices] IHttpContextAccessor httpContextAccessor) =>
     var connection = context?.Connection;
     var request = context?.Request;
 
-    return new
+    return new ConnectionInformation
     {
         IpAddress = connection?.RemoteIpAddress?.ToString(),
         Port = connection?.RemotePort,
@@ -34,8 +35,7 @@ app.MapGet("/info", ([FromServices] IHttpContextAccessor httpContextAccessor) =>
         Host = request?.Host.Host,
         IsHttps = request?.IsHttps
     };
-})
-.WithGroupName("IP");
+});
 
 app.MapGet("/", () => Results.Extensions.Html("<a href='/info'>/info</a>"));
 
